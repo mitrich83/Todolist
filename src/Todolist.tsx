@@ -25,13 +25,15 @@ const Todolist = (props: TodoListPropsType) => {
 
     const taskJSXElements = props.tasks.map(t => {
         return (
-            <li key={t.id}>
-                <input type="checkbox"
-                       checked={t.isDone}
-                       onChange={(e) => props.changeTaskStatus(t.id, e.currentTarget.checked)}
+            <li key={t.id} className={t.isDone ? 'is-done' : ''}>
+                <input
+                    className={'checkmark'}
+                    type="checkbox"
+                    checked={t.isDone}
+                    onChange={(e) => props.changeTaskStatus(t.id, e.currentTarget.checked)}
                 />
-                <span>{t.title}</span>
-                <button onClick={() => props.removeTask(t.id)}>x</button>
+                <span className={'title'}>{t.title}</span>
+                <button onClick={() => props.removeTask(t.id)} className={'button-delete'}>x</button>
             </li>
         )
     })
@@ -39,7 +41,7 @@ const Todolist = (props: TodoListPropsType) => {
         const trimmedTitle = title.trim()
         if (trimmedTitle) {
             props.addTask(trimmedTitle)
-        } else  {
+        } else {
             setError(true)
         }
         setTitle('')
@@ -61,14 +63,18 @@ const Todolist = (props: TodoListPropsType) => {
     }
 
     const onNewKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if(title.trim() === '') {
+            return setError(true)
+        }
         if (e.key === 'Enter') {
-            props.addTask(title)
+            props.addTask(title.trim())
             setTitle('')
         }
+        setError(false)
     }
 
     const errorMessage = error
-    ? <div className={'error-text'}>Title is required</div>
+        ? <div className={'error-text'}>Title is required</div>
         : null
 
     return <div>
