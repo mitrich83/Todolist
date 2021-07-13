@@ -3,7 +3,7 @@ import './App.css';
 import Todolist, {TaskType} from './Todolist';
 import {v1} from 'uuid';
 
-export type FilterValueType = 'all'|'active'|'completed'
+export type FilterValueType = 'all' | 'active' | 'completed'
 
 const App = () => {
     const [tasks, setTasks] = useState<Array<TaskType>>([
@@ -13,6 +13,7 @@ const App = () => {
         {id: v1(), title: 'ReactJS', isDone: false},
         {id: v1(), title: 'NodeJS', isDone: false},
     ])
+    const [filter, setFilter] = useState<FilterValueType>('all')
 
     const removeTask = (taskID: string) => {
         // - тот же код но в две строки
@@ -21,30 +22,39 @@ const App = () => {
         setTasks(tasks.filter(t => t.id !== taskID))
     }
 
-    const  addTask = (title:string) => {
-/*        const newTask:TaskType = {
-            id: v1(),
-            title: title,
-            isDone: false
-        }
-        const copyTask = [...tasks]
-        copyTask.push(newTask)
-        setTasks(copyTask)*/
+    const addTask = (title: string) => {
+        /*        const newTask:TaskType = {
+                    id: v1(),
+                    title: title,
+                    isDone: false
+                }
+                const copyTask = [...tasks]
+                copyTask.push(newTask)
+                setTasks(copyTask)*/
         setTasks([...tasks, {id: v1(), title: title, isDone: false}])
     }
 
+    const changeTaskStatus = (taskID: string, isDone: boolean) => {
+        /*        const updatedTasks = tasks.map(t => {
+                    if(t.id === taskID) {
+                        return {...t, isDone: isDone}
+                    }
+                    return t
+                })
+            setTasks(updatedTasks)
+        }*/
+        setTasks(tasks.map(t => t.id === taskID ? {...t, isDone} : t))
+    }
 
-
-    const [filter, setFilter]  = useState<FilterValueType>('all')
     const changeFilter = (nextFilter: FilterValueType) => {
         setFilter(nextFilter)
     }
 
     let tasksForRender = tasks
-    if(filter === 'active') {
+    if (filter === 'active') {
         tasksForRender = tasks.filter(t => !t.isDone) // t.isDone === false
     }
-    if(filter === 'completed') {
+    if (filter === 'completed') {
         tasksForRender = tasks.filter(t => t.isDone) //t.isDone === true
     }
 
@@ -58,9 +68,11 @@ const App = () => {
                 removeTask={removeTask}
                 changeFilter={changeFilter}
                 addTask={addTask}
+                filter={filter}
+                changeTaskStatus={changeTaskStatus}
             />
         </div>
-    );
-}
+    )
 
+}
 export default App;
