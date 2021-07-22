@@ -7,71 +7,18 @@
   margin-right: 50px;
 }
 
-.active-filter {
-  background-color: greenyellow;
-}
-
 .error {
-  border: 2px solid red;
-  outline: transparent;
+  border: red 1px solid;
 }
 
-.error-text {
+.error-message {
   color: red;
+}
+
+.active-filter {
+  background-color: aquamarine;
 }
 
 .is-done {
   opacity: 0.5;
 }
-
-
-.container {
-
-}
-
-.button-delete {
-  background-color: red;
-  border: 1px solid black;
-  color: white;
-  text-align: center;
-  width: 15px;
-  height: 15px;
-padding:inherit ;
-  margin: 5px;
-  grid-area: d;
-}
-
-.title {
-  background-color: greenyellow;
-  border: 1px solid black;
-  border-radius: 5px;
-  color: black;
-  margin: 5px;
-  padding:inherit ;
-
-}
-
-ul {
-  list-style-type: none;
-
-}
-
-/*.container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}*/
-.checkmark {
-  position: inherit;
-
-  height: 20px;
-  width: 20px;
-  background-color: greenyellow;
-  margin: 5px;
-  color: cyan;
-
-}
-
-
