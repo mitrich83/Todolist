@@ -1,5 +1,6 @@
 import React, {ChangeEvent,KeyboardEvent, useState} from 'react';
-import s from './InputItem.module.css'
+import {IconButton, TextField} from '@material-ui/core';
+import {AddBox} from '@material-ui/icons';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
@@ -8,7 +9,7 @@ type AddItemFormPropsType = {
 export const AddItemForm = (props:AddItemFormPropsType)=> {
 
     const [title, setTitle] = useState('')
-    const [error, setError] = useState<string | null>(null)
+    const [error, setError] = useState<boolean | undefined>(undefined)
 
     const addItem = () => {
         const trimmedTitle = title.trim()
@@ -16,7 +17,7 @@ export const AddItemForm = (props:AddItemFormPropsType)=> {
             props.addItem(trimmedTitle);
             setTitle('');
         } else {
-            setError('Title is required');
+            setError(true);
         }
     }
 
@@ -25,20 +26,30 @@ export const AddItemForm = (props:AddItemFormPropsType)=> {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null);
+        setError(undefined);
         if (e.key === 'Enter') {
             addItem();
         }
     }
     return (
-        <div className={s.inputItem}>
-            <input value={title}
-                   onChange={onChangeHandler}
-                   onKeyPress={onKeyPressHandler}
-                   className={error ? 'error' : ''}
+        <div>
+            <TextField
+                variant={'outlined'}
+                size={'small'}
+                value={title}
+                onChange={onChangeHandler}
+                onKeyPress={onKeyPressHandler}
+                label={"Title"}
+                error={error}
+                helperText={error && 'Title is required'}
             />
-            <button className={s.inputItem} onClick={addItem}>+</button>
-            {error && <div className="error-message">{error}</div>}
+            <IconButton
+                size={'small'}
+                color={'primary'}
+                onClick={addItem}
+               >
+                <AddBox/>
+            </IconButton>
         </div>
     )
 }
