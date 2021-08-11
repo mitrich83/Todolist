@@ -8,7 +8,7 @@ import {Menu} from '@material-ui/icons';
 
 export type FilterValuesType = 'all' | 'active' | 'completed';
 
-type TodolistsType = { id: string, title: string, filter: FilterValuesType }
+export type TodolistsType = { id: string, title: string, filter: FilterValuesType }
 
 type TasksGeneralType = { [key: string]: Array<TaskType> }
 
@@ -60,8 +60,8 @@ function App() {
         setTasks({...tasks, [todolistID]: tasks[todolistID].map(t => t.id === taskId ? {...t, isDone: isDone} : t)})
     }
 
-    function changeTodoListFilter(todolistID: string, value: FilterValuesType) {
-        setTodolists(todolists.map(tl => tl.id === todolistID ? {...tl, filter: value} : tl))
+    function changeTodoListFilter(todolistID: string, filter: FilterValuesType) {
+        setTodolists(todolists.map(tl => tl.id === todolistID ? {...tl, filter: filter} : tl))
     }
 
     const addTodolist = (title: string) => {
