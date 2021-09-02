@@ -5,7 +5,8 @@ type AddItemFormPropsType = {
     title: string
     changeTitle:(title:string)=> void
 }
-export const EditableSpan = (props: AddItemFormPropsType) => {
+export const EditableSpan = React.memo((props: AddItemFormPropsType) => {
+    console.log('EditableSpan')
     const [title, setTitle] = useState(props.title)
     const [editMode, setEditMode] = useState(false)
 
@@ -27,7 +28,6 @@ export const EditableSpan = (props: AddItemFormPropsType) => {
                 onBlur={offEditMode}
                 autoFocus={true}
                 />
-            /*<input  value={title} onChange={onChangeTitleHandler} onBlur={offEditMode} autoFocus={true}/>*/
             : <span onDoubleClick={onEditMode} >{props.title}</span>
     )
-}
+})
