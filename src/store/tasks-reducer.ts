@@ -1,8 +1,7 @@
-import {idID} from '@material-ui/core/locale';
-import {TasksStateType, TodolistsType} from '../App';
-import {TaskType} from '../Todolist';
+import {TasksStateType} from '../App';
 import {v1} from 'uuid';
-import {AddTodoListActionType, RemoveTodoListActionType, todolistID1, todolistID2} from './todolists-reducer';
+import {AddTodoListActionType, RemoveTodoListActionType} from './todolists-reducer';
+import {TaskPriorities, TaskStatuses, TaskType} from '../api/todolist-api';
 
 export type RemoveTaskActionType = {
     type: 'REMOVE-TASK'
@@ -18,7 +17,7 @@ export type ChangeTaskStatusActionType = {
     type: 'CHANGE-TASK-STATUS'
     todolistId: string
     id: string
-    isDone: boolean
+    status: TaskStatuses
 }
 export type ChangeTaskTitleActionType = {
     type: 'CHANGE-TASK-TITLE'
@@ -43,8 +42,8 @@ export const addTaskAC = (todolistId: string, title: string): AddTaskActionType 
     return {type: 'ADD-TASK', todolistId, title}
 }
 
-export const changeTaskStatusAC = (todolistId: string, id: string, isDone: boolean): ChangeTaskStatusActionType => {
-    return {type: 'CHANGE-TASK-STATUS', todolistId, id, isDone}
+export const changeTaskStatusAC = (todolistId: string, id: string, status: TaskStatuses): ChangeTaskStatusActionType => {
+    return {type: 'CHANGE-TASK-STATUS', todolistId, id, status}
 }
 
 export const changeTaskTitleAC = (todolistId: string, id: string, title: string): ChangeTaskTitleActionType => {
@@ -62,7 +61,19 @@ export const tasksReducer = (state: TasksStateType = initialState , action: Acti
             return stateCopy
         }
         case 'ADD-TASK': {
-            const newTask = {id: v1(), title: action.title, isDone: false}
+            const newTask: TaskType = {
+                id: v1(),
+                title: action.title,
+                status: TaskStatuses.New,
+                completed: true,
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                startDate: '',
+                description: '',
+                deadline: '',
+                todoListId: action.todolistId
+            }
             return {
                 ...state,
                 [action.todolistId]: [
@@ -71,10 +82,11 @@ export const tasksReducer = (state: TasksStateType = initialState , action: Acti
             }
         }
         case 'CHANGE-TASK-STATUS': {
+            console.log("c")
             return {
                 ...state,
                 [action.todolistId]: state[action.todolistId].map(t => t.id === action.id
-                    ? {...t, isDone: action.isDone} : t
+                    ? {...t, status: action.status} : t
                 )
             }
         }

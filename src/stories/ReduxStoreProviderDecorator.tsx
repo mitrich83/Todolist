@@ -4,7 +4,8 @@ import React from 'react';
 import {combineReducers, createStore} from 'redux'
 import {v1} from 'uuid'
 import {tasksReducer} from '../store/tasks-reducer';
-import {todolistsReducer} from '../store/todolists-reducer';
+import {todolistID1, todolistID2, todolistsReducer} from '../store/todolists-reducer';
+import {TaskPriorities, TaskStatuses} from '../api/todolist-api';
 
 
 const rootReducer = combineReducers({
@@ -14,17 +15,63 @@ const rootReducer = combineReducers({
 
 const initialGlobalState = {
     todolists: [
-        {id: "todolistId1", title: "What to learn", filter: "all"},
-        {id: "todolistId2", title: "What to buy", filter: "all"}
+        {id: todolistID1, title: 'What to learn', filter: 'all', addedDate: '', order: 0},
+        {id: todolistID1, title: 'What to learn', filter: 'all', addedDate: '', order: 1}
     ] ,
     tasks: {
         ["todolistId1"]: [
-            {id: v1(), title: "HTML&CSS", isDone: true},
-            {id: v1(), title: "JS", isDone: true}
+            {      id: v1(),
+                title: 'HTML',
+                status: TaskStatuses.Completed,
+                completed: true,
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                startDate: '',
+                description: '',
+                todoListId: todolistID1,
+                deadline: ''},
+            {
+                id: v1(),
+                title: 'HTML',
+                status: TaskStatuses.Completed,
+                completed: true,
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                startDate: '',
+                description: '',
+                todoListId: todolistID1,
+                deadline: ''
+            }
         ],
         ["todolistId2"]: [
-            {id: v1(), title: "Milk", isDone: true},
-            {id: v1(), title: "React Book", isDone: true}
+            {
+                id: v1(),
+                title: 'HTML',
+                status: TaskStatuses.Completed,
+                completed: true,
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                startDate: '',
+                description: '',
+                todoListId: todolistID2,
+                deadline: ''
+            },
+            {
+                id: v1(),
+                title: 'HTML',
+                status: TaskStatuses.Completed,
+                completed: true,
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+                startDate: '',
+                description: '',
+                todoListId: todolistID2,
+                deadline: ''
+            }
         ]
     }
 };
