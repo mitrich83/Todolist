@@ -8,8 +8,7 @@ import {
     addTodolistAC,
     changeTodoListFilterAC,
     changeTodolistTitleAC, FilterValuesType,
-    removeTodolistAC, TodolistDomainType,
-    todolistsReducer
+    removeTodolistAC, TodolistDomainType
 } from './store/todolists-reducer';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './store/tasks-reducer';
 import {useDispatch, useSelector} from 'react-redux';
@@ -85,8 +84,6 @@ function AppWithRedux() {
                 >
                     {todolists.map((tl) => {
                         let tasksForTodolist = tasks[tl.id];
-
-
                         return (
                             <Grid item key={tl.id}
                             >

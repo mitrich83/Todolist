@@ -198,6 +198,7 @@ function App() {
                 <Grid container spacing={5}
                 >
                     {todolists.map((tl) => {
+                        debugger
                         let tasksForTodolist = tasks[tl.id];
                         if (tl.filter === 'active') {
                             tasksForTodolist = tasks[tl.id].filter(t => t.status === TaskStatuses.New);

@@ -65,7 +65,7 @@ export const tasksReducer = (state: TasksStateType = initialState , action: Acti
                 id: v1(),
                 title: action.title,
                 status: TaskStatuses.New,
-                completed: true,
+                completed: false,
                 addedDate: '',
                 order: 0,
                 priority: TaskPriorities.Low,
@@ -82,7 +82,7 @@ export const tasksReducer = (state: TasksStateType = initialState , action: Acti
             }
         }
         case 'CHANGE-TASK-STATUS': {
-            console.log("c")
+            debugger
             return {
                 ...state,
                 [action.todolistId]: state[action.todolistId].map(t => t.id === action.id
