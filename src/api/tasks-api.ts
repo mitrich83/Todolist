@@ -10,17 +10,17 @@
 // })
 //
 // export const tasksAPI = {
-//     getTask(todolistId: string) {
-//        return  instance.get<TasksResponseType>(`${todolistId}/tasks`)
+//     getTask(todoListId: string) {
+//        return  instance.get<TasksResponseType>(`${todoListId}/tasks`)
 //     },
-//     createTask(todolistId: string, title: string){
-//         return instance.post<CommonResponseTaskType<{items: TaskType[]}>>(`${todolistId}/tasks`, {title})
+//     addTask(todoListId: string, title: string){
+//         return instance.post<ResponseTaskType<{items: TaskType[]}>>(`${todoListId}/tasks`, {title})
 //     },
-//     deleteTask(todolistId: string, taskId: string){
-//         return instance.delete<CommonResponseTaskType>(`${todolistId}/tasks/${taskId}`)
+//     removeTask(todoListId: string, taskId: string){
+//         return instance.delete<ResponseTaskType>(`${todoListId}/tasks/${taskId}`)
 //     },
-//     updateTaskTitle(todolistId: string, taskId: string, title: string){
-//         return instance.put<CommonResponseTaskType<{items: TaskType[]}>>(`${todolistId}/tasks/${taskId}`, {title})
+//     updateTaskTitle(todoListId: string, taskId: string, title: string){
+//         return instance.put<ResponseTaskType<{items: TaskType[]}>>(`${todoListId}/tasks/${taskId}`, {title})
 //     }
 // }
 //
@@ -42,7 +42,7 @@
 //     order: number
 //     addedDate: string
 // }
-// type CommonResponseTaskType<T = {}> = {
+// type ResponseTaskType<T = {}> = {
 //     data: T,
 //     fieldsErrors: string[],
 //     messages: string[],

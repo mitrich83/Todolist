@@ -24,7 +24,7 @@ const TaskTemplate: ComponentStory<typeof Task> = (args) => <Task {...args} />;
 
 export const TaskIsDoneStory = TaskTemplate.bind({});
 TaskIsDoneStory.args = {
-    todolistID: 'todo 1',
+    todoListId: 'todo 1',
     task: {
         id: v1(),
         title: 'HTML',
@@ -42,7 +42,7 @@ TaskIsDoneStory.args = {
 };
 export const TaskIsNoteDoneStory = TaskTemplate.bind({});
 TaskIsNoteDoneStory.args = {
-    todolistID: 'todo 1',
+    todoListId: 'todo 1',
     task: {
         id: v1(),
         title: 'HTML',

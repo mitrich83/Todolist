@@ -9,8 +9,8 @@ export default {
 // export const GetTasks = () => {
 //     const [state, setState] = useState<any>(null)
 //     useEffect(() => {
-//         const todolistId = 'b5b88a8f-6e12-4259-ae44-f66c471793c9'
-//         tasksAPI.getTask(todolistId)
+//         const todoListId = 'b5b88a8f-6e12-4259-ae44-f66c471793c9'
+//         tasksAPI.getTask(todoListId)
 //             .then((res) => {
 //                 setState(res.data)
 //             })
@@ -20,18 +20,18 @@ export default {
 // }
 // export const CreateTask = () => {
 //     const [state, setState] = useState<any>(null)
-//     const [todolistId, setTodolistId] = useState<string>('')
+//     const [todoListId, setTodolistId] = useState<string>('')
 //     const [title, setTitle] = useState<string>('')
 //
 //     const onClickCreateTask = () => {
-//         tasksAPI.createTask(todolistId, title)
+//         tasksAPI.addTask(todoListId, title)
 //             .then((res) => {
 //                 setState(res.data)
 //             })
 //     }
 //     return <div> {JSON.stringify(state)}
 //         <div>
-//             <input placeholder={'todolistId'} value={todolistId}
+//             <input placeholder={'todoListId'} value={todoListId}
 //                    onChange={(e) => {
 //                        setTodolistId(e.currentTarget.value)
 //                    }}
@@ -47,11 +47,11 @@ export default {
 // }
 // export const DeleteTask = () => {
 //     const [state, setState] = useState<any>(null)
-//     const [todolistId, setTodolistId] = useState<string>('')
+//     const [todoListId, setTodolistId] = useState<string>('')
 //     const [taskId, setTaskId] = useState<string>('')
 //
 //     const onClickDeleteTask = () => {
-//         tasksAPI.deleteTask(todolistId, taskId)
+//         tasksAPI.removeTask(todoListId, taskId)
 //             .then((res) => {
 //                 setState(res.data)
 //             })
@@ -59,7 +59,7 @@ export default {
 //
 //     return <div> {JSON.stringify(state)}
 //         <div>
-//             <input placeholder={'todolistId'} value={todolistId}
+//             <input placeholder={'todoListId'} value={todoListId}
 //                    onChange={(e) => {
 //                        setTodolistId(e.currentTarget.value)
 //                    }}
@@ -75,19 +75,19 @@ export default {
 // }
 // export const UpdateTaskTitle = () => {
 //     const [state, setState] = useState<any>(null)
-//     const [todolistId, setTodolistId] = useState<string>('')
+//     const [todoListId, setTodolistId] = useState<string>('')
 //     const [taskId, setTaskId] = useState<string>('')
 //     const [title, setTitle] = useState<string>('')
 //
 //     const onClickChangeTaskTitle = ()=> {
-//         tasksAPI.updateTaskTitle(todolistId, taskId, title)
+//         tasksAPI.updateTaskTitle(todoListId, taskId, title)
 //             .then((res) => {
 //                 setState(res.data)
 //             })
 //     }
 //     return <div> {JSON.stringify(state)}
 //         <div>
-//             <input placeholder={'todolistId'} value={todolistId}
+//             <input placeholder={'todoListId'} value={todoListId}
 //                    onChange={(e) => {
 //                        setTodolistId(e.currentTarget.value)
 //                    }}

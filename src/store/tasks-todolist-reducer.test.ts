@@ -17,11 +17,11 @@ test('ids should be equals', () => {
     const idFromTasks = keys[0];
     const idFromTodolists = endTodolistsState[0].id;
 
-    expect(idFromTasks).toBe(action.todolistId);
-    expect(idFromTodolists).toBe(action.todolistId);
+    expect(idFromTasks).toBe(action.todoListId);
+    expect(idFromTodolists).toBe(action.todoListId);
 });
 
-test('property with todolistId should be deleted', () => {
+test('property with todoListId should be deleted', () => {
     const startState: TasksStateType = {
         "todolistId1": [
             { id: "1", title: "CSS", isDone: false },

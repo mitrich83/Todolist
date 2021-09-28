@@ -1,7 +1,7 @@
 import {v1} from 'uuid';
 
 import {
-    ActionType,
+    TodolistsActionsType,
     addTodolistAC, changeTodoListFilterAC,
     changeTodolistTitleAC, FilterValuesType,
     removeTodolistAC, TodolistDomainType,
@@ -56,9 +56,9 @@ test('change todolist title', ()=> {
 
     let newTodolistTitle = 'New todolist'
 
-    const action: ActionType = {
+    const action: TodolistsActionsType = {
         type: 'CHANGE-TODOLIST-TITLE',
-        todolistID: todolistID2,
+        todoListId: todolistID2,
         title: newTodolistTitle
     }
 
@@ -71,9 +71,9 @@ test('change todolist title', ()=> {
 test('change todolist filter', ()=> {
     let newFilter: FilterValuesType = "all";
 
-    const action: ActionType = {
+    const action: TodolistsActionsType = {
         type: 'CHANGE-TODOLIST-FILTER',
-        todolistID: todolistID2,
+        todoListId: todolistID2,
         filter: newFilter
     }
 

@@ -7,6 +7,7 @@ export default {
     title: 'API'
 }
 
+/*
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
@@ -74,7 +75,7 @@ export const CreateTask = () => {
     const [title, setTitle] = useState<string>('')
 
     const onClickCreateTask = () => {
-        tasksAPI.createTask(todolistId, title)
+        tasksAPI.addTask(todolistId, title)
             .then((res) => {
                 setState(res.data)
             })
@@ -101,7 +102,7 @@ export const DeleteTask = () => {
     const [taskId, setTaskId] = useState<string>('')
 
     const onClickDeleteTask = () => {
-        tasksAPI.deleteTask(todolistId, taskId)
+        tasksAPI.removeTask(todolistId, taskId)
             .then((res) => {
                 setState(res.data)
             })
@@ -155,4 +156,4 @@ export const UpdateTaskTitle = () => {
             <button onClick={onClickChangeTaskTitle}>New Task Title</button>
         </div>
     </div>
-}
+}*/
