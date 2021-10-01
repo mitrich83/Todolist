@@ -10,9 +10,10 @@ import {
 } from './todolists-reducer';
 import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from './tasks-reducer';
 import {TaskStatuses} from '../../api/todolist-api';
-import {Grid, Paper} from '@material-ui/core';
 import {AddItemForm} from '../../components/AddItemForm/AddItemForm';
 import {Todolist} from './Todolist/Todolist';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 export const TodolistList: React.FC = (props) => {
 

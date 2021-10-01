@@ -1,8 +1,9 @@
 import React, {ChangeEvent, useCallback} from 'react';
-import {Checkbox, IconButton} from '@material-ui/core';
 import {EditableSpan} from '../../../../components/EditableSpan/EditableSpan';
-import DeleteIcon from '@material-ui/icons/Delete';
 import {TaskStatuses, TaskType} from '../../../../api/todolist-api';
+import { Delete } from '@mui/icons-material';
+import IconButton from '@mui/material/IconButton';
+import Checkbox from '@mui/material/Checkbox';
 
 
 export const Task = React.memo((props: TaskPropsType) => {
@@ -29,7 +30,7 @@ export const Task = React.memo((props: TaskPropsType) => {
         <IconButton
             size={'small'}
             onClick={onClickHandler}>
-            <DeleteIcon/>
+            <Delete/>
         </IconButton>
 
     </li>

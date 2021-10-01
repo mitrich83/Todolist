@@ -3,8 +3,9 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import {Task} from './Task';
 import {TaskPriorities, TaskStatuses} from '../../../../api/todolist-api';
-import {v1} from 'uuid';
+
 import {todolistID1} from '../../todolists-reducer';
+import {v1} from 'uuid';
 
 const removeTaskCallback = action('removeTask clicked')
 const changeTaskStatusCallback = action('changeTaskStatus clicked')

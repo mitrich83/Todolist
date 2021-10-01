@@ -1,26 +1,19 @@
 import React, {useCallback, useEffect} from 'react';
 import './App.css';
-import {Todolist} from '../features/TodolistsList/Todolist/Todolist';
-import {AddItemForm} from '../components/AddItemForm/AddItemForm';
-import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@material-ui/core';
-import {Menu} from '@material-ui/icons';
-import {
-    addTodolistTC,
-    changeTodoListFilterAC,
-    changeTodolistTitleTC, FilterValuesType,
-    removeTodolistTC,
-    setTodolistThunk,
-    TodolistDomainType
-} from '../features/TodolistsList/todolists-reducer';
-import {
-    addTaskTC,
-    removeTaskTC,
-    TasksStateType, updateTaskTC,
-} from '../features/TodolistsList/tasks-reducer';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType} from './store';
-import {TaskStatuses} from '../api/todolist-api';
 import {TodolistList} from '../features/TodolistsList/TodolistList';
+
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import { Menu } from '@mui/icons-material';
+import LinearProgress from '@mui/material/LinearProgress';
+import {useSelector} from 'react-redux';
+import {AppRootStateType} from './store';
+// import {RequestStatusType} from './app-reducer';
+// import {ErrorSnackbar} from '../components/ErrorSnackbar';
 
 
 function App() {
