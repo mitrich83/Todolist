@@ -1,6 +1,6 @@
 
 import {v1} from 'uuid';
-import {TaskPriorities, TaskStatuses} from '../api/todolist-api';
+import {TaskPriorities, TaskStatuses} from '../../api/todolist-api';
 import {TasksStateType} from './tasks-reducer';
 
 export type RemoveTaskActionType = {
