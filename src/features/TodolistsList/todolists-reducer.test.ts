@@ -1,3 +1,4 @@
+
 import {v1} from 'uuid';
 
 import {
@@ -8,6 +9,7 @@ import {
     todolistsReducer
 } from './todolists-reducer';
 
+/*
 let todolistID1 = v1()
 let todolistID2 = v1()
 
@@ -81,4 +83,4 @@ test('change todolist filter', ()=> {
 
     expect(endState[0].filter).toBe("all");
     expect(endState[1].filter).toBe(newFilter);
-})
+})*/
