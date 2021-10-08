@@ -5,19 +5,19 @@ import thunkMiddleware from 'redux-thunk'
 import { appReducer } from './app-reducer'
 import {authReducer} from '../features/login/auth-reducer';
 
-// объединяя reducer-ы с помощью combineReducers,
-// мы задаём структуру нашего единственного объекта-состояния
+// combine reducers with combineReducers,
+// set the structure of our single state object
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer,
     app: appReducer,
     auth: authReducer
 })
-// непосредственно создаём store
+// here create store
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
-// определить автоматически тип всего объекта состояния
+// determine automatically the type of the entire state object
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
-// а это, чтобы можно было в консоли браузера обращаться к store в любой момент
+// and this, so that you can access the store at any time in the browser console
 // @ts-ignore
 window.store = store;

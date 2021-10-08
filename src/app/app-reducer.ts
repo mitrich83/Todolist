@@ -24,9 +24,9 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type InitialStateType = {
-    // происходит ли сейчас взаимодействие с сервером
+    // Does the connection to the server happen
     status: RequestStatusType
-    // если ошибка какая-то глобальная произойдёт - мы запишем текст ошибки сюда
+    // if error is global we write it here
     error: string | null
     isInitialized: boolean
 }
@@ -49,7 +49,6 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
         .then(res => {
         if (res.data.resultCode === 0) {
             dispatch(setIsLoggedInAC(true))
-
         } else {
             handleServerAppError(res.data, dispatch);
         }  dispatch(setInitializedAC(true))
