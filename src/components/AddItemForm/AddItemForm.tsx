@@ -1,26 +1,25 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import { AddBox } from '@mui/icons-material';
-import {RequestStatusType} from '../../app/app-reducer';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
-    disabled?: RequestStatusType
-
+    disabled?: boolean
 }
-export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
-    console.log('AddItemForm is called')
-    const [title, setTitle] = useState('')
-    const [error, setError] = useState<boolean | undefined>(undefined)
 
-    const addItem = () => {
-        const trimmedTitle = title.trim()
-        if (trimmedTitle !== '') {
-            props.addItem(trimmedTitle);
+export const AddItemForm = React.memo(function ({addItem, disabled = false}: AddItemFormPropsType) {
+    console.log('AddItemForm called')
+
+    let [title, setTitle] = useState('')
+    let [error, setError] = useState<string | null>(null)
+
+    const addItemHandler = () => {
+        if (title.trim() !== '') {
+            addItem(title);
             setTitle('');
         } else {
-            setError(true);
+            setError('Title is required');
         }
     }
 
@@ -29,34 +28,26 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (error !== undefined) {
-            setError(undefined)
+        if (error !== null) {
+            setError(null);
         }
-        if (e.key === 'Enter') {
-            addItem();
+        if (e.charCode === 13) {
+            addItemHandler();
         }
     }
-    return (
-        <div>
-            <TextField
-                variant={'outlined'}
-                size={'small'}
-                value={title}
-                onChange={onChangeHandler}
-                onKeyPress={onKeyPressHandler}
-                label={'Title'}
-                error={error}
-                helperText={error && 'Title is required'}
-                disabled={props.disabled === 'loading'}
-            />
-            <IconButton
-                size={'small'}
-                color={'primary'}
-                onClick={addItem}
-                disabled={props.disabled === 'loading'}
-            >
-                <AddBox/>
-            </IconButton>
-        </div>
-    )
+
+    return <div>
+        <TextField variant="outlined"
+                   disabled={disabled}
+                   error={!!error}
+                   value={title}
+                   onChange={onChangeHandler}
+                   onKeyPress={onKeyPressHandler}
+                   label="Title"
+                   helperText={error}
+        />
+        <IconButton color="primary" onClick={addItemHandler} disabled={disabled}>
+            <AddBox/>
+        </IconButton>
+    </div>
 })
