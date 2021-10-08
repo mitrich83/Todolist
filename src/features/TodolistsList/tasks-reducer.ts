@@ -1,13 +1,18 @@
-import { AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType } from './todolists-reducer'
-import { TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType } from '../../api/todolists-api'
-import { Dispatch } from 'redux'
-import { AppRootStateType } from '../../app/store'
-import { SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType } from '../../app/app-reducer'
-import { handleServerAppError, handleServerNetworkError } from '../../utils/error-utils'
+import {
+    AddTodolistActionType,
+    ClearTodosDataActionType,
+    RemoveTodolistActionType,
+    SetTodolistsActionType
+} from './todolists-reducer'
+import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType} from '../../api/todolists-api'
+import {Dispatch} from 'redux'
+import {AppRootStateType} from '../../app/store'
+import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from '../../app/app-reducer'
+import {handleServerAppError, handleServerNetworkError} from '../../utils/error-utils'
 
 const initialState: TasksStateType = {}
 
-export const tasksReducer = (state: TasksStateType = initialState, action: ActionsType): TasksStateType => {
+export const tasksReducer = (state: TasksStateType = initialState, action: TasksActionsType): TasksStateType => {
     switch (action.type) {
         case 'REMOVE-TASK':
             return {...state, [action.todolistId]: state[action.todolistId].filter(t => t.id !== action.taskId)}
@@ -34,6 +39,8 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
         }
         case 'SET-TASKS':
             return {...state, [action.todolistId]: action.tasks}
+        case 'CLEAR-DATA':
+            return {}
         default:
             return state
     }
@@ -55,7 +62,7 @@ export const setTasksAC = (tasks: Array<TaskType>, todolistId: string) => ({
 } as const)
 
 // thunks
-export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch<ActionsType | SetAppStatusActionType>) => {
+export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch<TasksActionsType | SetAppStatusActionType>) => {
     dispatch(setAppStatusAC('loading'))
     todolistsAPI.getTasks(todolistId)
         .then((res) => {
@@ -64,14 +71,14 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch<ActionsT
             dispatch(setAppStatusAC('succeeded'))
         })
 }
-export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: Dispatch<ActionsType>) => {
+export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: Dispatch<TasksActionsType>) => {
     todolistsAPI.deleteTask(todolistId, taskId)
         .then(res => {
             const action = removeTaskAC(taskId, todolistId)
             dispatch(action)
         })
 }
-export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispatch<ActionsType | SetAppErrorActionType | SetAppStatusActionType>) => {
+export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispatch<TasksActionsType | SetAppErrorActionType | SetAppStatusActionType>) => {
     dispatch(setAppStatusAC('loading'))
     todolistsAPI.createTask(todolistId, title)
         .then(res => {
@@ -134,12 +141,20 @@ export type UpdateDomainTaskModelType = {
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
-type ActionsType =
-    | ReturnType<typeof removeTaskAC>
-    | ReturnType<typeof addTaskAC>
-    | ReturnType<typeof updateTaskAC>
+
+export type AddTasksActionType = ReturnType<typeof addTaskAC>
+export type RemoveTasksActionType = ReturnType<typeof removeTaskAC>
+export type SetUpdateTasksActionType = ReturnType<typeof updateTaskAC>
+export type SetTasksActionType = ReturnType<typeof setTasksAC>
+
+export type TasksActionsType =
+    | RemoveTasksActionType
+    | AddTasksActionType
+    | SetUpdateTasksActionType
     | AddTodolistActionType
     | RemoveTodolistActionType
     | SetTodolistsActionType
-    | ReturnType<typeof setTasksAC>
-type ThunkDispatch = Dispatch<ActionsType | SetAppStatusActionType | SetAppErrorActionType>
+    | SetTasksActionType
+    | ClearTodosDataActionType
+
+type ThunkDispatch = Dispatch<TasksActionsType | SetAppStatusActionType | SetAppErrorActionType>
